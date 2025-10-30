@@ -50,28 +50,43 @@
     fetch('benchmarks/benchmark-latest.md')
       .then(r => r.text())
       .then(md => {
+        console.log('Markdown content:', md);
         // Extract table data from markdown
-        const lines = md.split('\\n');
-        const tableStart = lines.findIndex(l => l.includes('| Method'));
+        const lines = md.split('\n');
+        console.log('Total lines:', lines.length);
+        
+        const tableStart = lines.findIndex(l => l.trim().includes('| Method'));
+        console.log('Table start index:', tableStart);
         
         if (tableStart === -1) {
-          document.getElementById('latest-summary').innerHTML = '<p>No benchmark results available yet.</p>';
+          document.getElementById('latest-summary').innerHTML = '<p>No benchmark results available yet. Run benchmarks workflow to generate data.</p>';
+          document.getElementById('latest-details').innerHTML = '';
           return;
         }
 
-        // Parse the markdown table
+        // Parse the markdown table (skip header and separator line)
         const dataLines = lines.slice(tableStart + 2).filter(l => l.trim().startsWith('|') && !l.includes('---'));
+        console.log('Data lines:', dataLines);
+        
         const results = dataLines.map(line => {
           const cols = line.split('|').map(c => c.trim()).filter(c => c);
           return {
-            method: cols[0],
-            mean: cols[1],
-            error: cols[2],
-            stdDev: cols[3],
+            method: cols[0] || '',
+            mean: cols[1] || 'N/A',
+            error: cols[2] || 'N/A',
+            stdDev: cols[3] || 'N/A',
             gen0: cols[4] || 'N/A',
             allocated: cols[5] || 'N/A'
           };
-        });
+        }).filter(r => r.method); // Filter out empty rows
+
+        console.log('Parsed results:', results);
+
+        if (results.length === 0) {
+          document.getElementById('latest-summary').innerHTML = '<p>No benchmark data found in report.</p>';
+          document.getElementById('latest-details').innerHTML = '';
+          return;
+        }
 
         // Display summary cards
         let summaryHTML = '';
@@ -95,7 +110,8 @@
         document.getElementById('latest-details').innerHTML = tableHTML;
       })
       .catch(e => {
-        document.getElementById('latest-summary').innerHTML = '<p>Benchmark results will appear after first run.</p>';
+        console.error('Error fetching benchmarks:', e);
+        document.getElementById('latest-summary').innerHTML = '<p>Error loading benchmark results: ' + e.message + '</p>';
       });
 
     // Fetch benchmark history
