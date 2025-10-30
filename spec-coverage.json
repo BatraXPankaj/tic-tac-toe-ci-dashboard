@@ -1,0 +1,11 @@
+{
+  "specificationCoverageScore": 96.6,
+  "status": "excellent",
+  "details": {
+    "productionLines": 385,
+    "featureLines": 93,
+    "stepLines": 196,
+    "specToCodeRatio": 24.2,
+    "targetRatio": 25
+  }
+}
