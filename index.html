@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TicTacToe CI/CD Dashboard</title>
+  <style>body{font-family:Arial,sans-serif;margin:2rem;} a{display:block;margin:.5rem 0;} h1{margin-top:0;} .section{margin-bottom:1.5rem;} code{background:#f5f5f5;padding:2px 4px;border-radius:4px;} .metrics{background:#f0f8ff;padding:1rem;border:1px solid #d0e7ff;border-radius:6px;display:inline-block;} </style>
+</head>
+<body>
+  <h1>TicTacToe CI/CD Dashboard</h1>
+  <div class="section">
+    <h2>Artifacts</h2>
+    <a href="coverage/index.htm">Code Coverage Report (HTML)</a>
+    <a href="livingdoc/index.html">SpecFlow Living Documentation</a>
+    <a href="benchmarks.html">Performance Benchmarks (History)</a>
+  </div>
+  <div class="section">
+    <h2>Coverage Summary</h2>
+    <div id="coverage" class="metrics">Loading coverage...</div>
+    <script>
+      fetch('coverage-summary.json')
+        .then(r => r.json())
+        .then(d => {
+          const pct = (x) => (x*100).toFixed(2) + '%';
+          document.getElementById('coverage').innerHTML =
+            `<strong>Line:</strong> ${pct(d.lineRate)}<br/>` +
+            `<strong>Branch:</strong> ${pct(d.branchRate)}<br/>` +
+            `<em>Generated UTC:</em> ${d.generatedUtc}`;
+        })
+        .catch(e => { document.getElementById('coverage').textContent = 'Coverage summary unavailable'; });
+    </script>
+  </div>
+  <div class="section">
+    <h2>About</h2>
+    <p>This dashboard is generated automatically by the <code>docs-dashboard</code> workflow. It showcases automated documentation, test coverage, and BDD specs.</p>
+  </div>
+</body>
+</html>

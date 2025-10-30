@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Performance Benchmarks - TicTacToe</title>
+  <style>body{font-family:Arial,sans-serif;margin:2rem;} table{border-collapse:collapse;width:100%;} th,td{border:1px solid #ccc;padding:.5rem;text-align:left;} th{background:#f0f8ff;} a{color:#0366d6;} canvas{max-width:800px;}</style>
+</head>
+<body>
+  <h1>Performance Benchmarks</h1>
+  <p><a href="index.html">← Back to Dashboard</a></p>
+  <div id="benchmarks">Loading benchmarks...</div>
+  <canvas id="chart" width="800" height="400"></canvas>
+  <script>
+    fetch('benchmarks/benchmarks-history.json')
+      .then(r => r.json())
+      .then(data => {
+        if (data.length === 0) {
+          document.getElementById('benchmarks').textContent = 'No benchmark data yet.';
+          return;
+        }
+        let html = '<table><tr><th>Timestamp (UTC)</th><th>Commit</th><th>Details</th></tr>';
+        data.forEach(b => {
+          html += `<tr><td>${b.timestampUtc}</td><td>${b.commit.substr(0,7)}</td><td><a href="benchmarks/benchmark-latest.md" target="_blank">View Report</a></td></tr>`;
+        });
+        html += '</table>';
+        document.getElementById('benchmarks').innerHTML = html;
+      })
+      .catch(e => { document.getElementById('benchmarks').textContent = 'Benchmark history unavailable.'; });
+  </script>
+</body>
+</html>
