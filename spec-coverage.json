@@ -1,18 +1,18 @@
 {
   "specificationCoverage": {
-    "score": 96.6,
-    "ratio": 0.242,
+    "score": 96.1,
+    "ratio": 0.24,
     "status": "excellent"
   },
   "details": {
-    "productionLines": 385,
+    "productionLines": 387,
     "productionFiles": 12,
     "featureLines": 93,
     "featureFiles": 3,
     "stepLines": 196,
     "stepFiles": 3,
-    "specToCodeRatio": 24.2,
+    "specToCodeRatio": 24.0,
     "targetRatio": 25
   },
-  "generatedUtc": "2025-10-30T16:58:10.505804Z"
+  "generatedUtc": "2025-10-30T17:07:57.405438Z"
 }
