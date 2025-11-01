@@ -213,12 +213,16 @@ var assemblies = [
   {
     "name": "TicTacToe.CLI",
     "classes": [
-      { "name": "TicTacToe.CLI.AI.EasyComputerPlayer", "rp": "TicTacToe.CLI_EasyComputerPlayer.html", "cl": 4, "ucl": 1, "cal": 5, "tl": 17, "cb": 1, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "TicTacToe.CLI.AI.HardComputerPlayer", "rp": "TicTacToe.CLI_HardComputerPlayer.html", "cl": 63, "ucl": 1, "cal": 64, "tl": 129, "cb": 54, "tb": 58, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "TicTacToe.CLI.AI.MediumComputerPlayer", "rp": "TicTacToe.CLI_MediumComputerPlayer.html", "cl": 37, "ucl": 9, "cal": 46, "tl": 103, "cb": 35, "tb": 46, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "TicTacToe.CLI.Game.GameEngine", "rp": "TicTacToe.CLI_GameEngine.html", "cl": 32, "ucl": 7, "cal": 39, "tl": 93, "cb": 32, "tb": 36, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
-      { "name": "TicTacToe.CLI.Models.Board", "rp": "TicTacToe.CLI_Board.html", "cl": 25, "ucl": 2, "cal": 27, "tl": 69, "cb": 26, "tb": 34, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
       { "name": "TicTacToe.CLI.Program", "rp": "TicTacToe.CLI_Program.html", "cl": 0, "ucl": 83, "cal": 83, "tl": 153, "cb": 0, "tb": 52, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+    ]},
+  {
+    "name": "TicTacToe.Core",
+    "classes": [
+      { "name": "TicTacToe.Core.AI.EasyComputerPlayer", "rp": "TicTacToe.Core_EasyComputerPlayer.html", "cl": 4, "ucl": 1, "cal": 5, "tl": 17, "cb": 1, "tb": 2, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "TicTacToe.Core.AI.HardComputerPlayer", "rp": "TicTacToe.Core_HardComputerPlayer.html", "cl": 63, "ucl": 1, "cal": 64, "tl": 129, "cb": 54, "tb": 58, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "TicTacToe.Core.AI.MediumComputerPlayer", "rp": "TicTacToe.Core_MediumComputerPlayer.html", "cl": 37, "ucl": 9, "cal": 46, "tl": 103, "cb": 35, "tb": 46, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "TicTacToe.Core.Game.GameEngine", "rp": "TicTacToe.Core_GameEngine.html", "cl": 32, "ucl": 7, "cal": 39, "tl": 93, "cb": 32, "tb": 36, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
+      { "name": "TicTacToe.Core.Models.Board", "rp": "TicTacToe.Core_Board.html", "cl": 25, "ucl": 2, "cal": 27, "tl": 69, "cb": 26, "tb": 34, "cm": 0, "fcm": 0, "tm": 0, "lch": [], "bch": [], "mch": [], "mfch": [], "hc": [], "metrics": { } },
     ]},
 ];
 
@@ -233,7 +237,7 @@ var riskHotspotMetrics = [
 
 var riskHotspots = [
   {
-    "assembly": "TicTacToe.CLI", "class": "TicTacToe.CLI.Program", "reportPath": "TicTacToe.CLI_Program.html", "methodName": "GetPlayerMove(TicTacToe.CLI.Game.GameEngine)", "methodShortName": "GetPlayerMove(...)", "fileIndex": 0, "line": 98,
+    "assembly": "TicTacToe.CLI", "class": "TicTacToe.CLI.Program", "reportPath": "TicTacToe.CLI_Program.html", "methodName": "GetPlayerMove(TicTacToe.Core.Game.GameEngine)", "methodShortName": "GetPlayerMove(...)", "fileIndex": 0, "line": 98,
     "metrics": [
       { "value": 156, "exceeded": true },
       { "value": 12, "exceeded": false },
@@ -245,13 +249,13 @@ var riskHotspots = [
       { "value": 10, "exceeded": false },
     ]},
   {
-    "assembly": "TicTacToe.CLI", "class": "TicTacToe.CLI.Program", "reportPath": "TicTacToe.CLI_Program.html", "methodName": "PlayGame(TicTacToe.CLI.Models.GameMode)", "methodShortName": "PlayGame(...)", "fileIndex": 0, "line": 57,
+    "assembly": "TicTacToe.CLI", "class": "TicTacToe.CLI.Program", "reportPath": "TicTacToe.CLI_Program.html", "methodName": "PlayGame(TicTacToe.Core.Models.GameMode)", "methodShortName": "PlayGame(...)", "fileIndex": 0, "line": 57,
     "metrics": [
       { "value": 110, "exceeded": true },
       { "value": 10, "exceeded": false },
     ]},
   {
-    "assembly": "TicTacToe.CLI", "class": "TicTacToe.CLI.Program", "reportPath": "TicTacToe.CLI_Program.html", "methodName": "DisplayBoard(TicTacToe.CLI.Models.Board)", "methodShortName": "DisplayBoard(...)", "fileIndex": 0, "line": 117,
+    "assembly": "TicTacToe.CLI", "class": "TicTacToe.CLI.Program", "reportPath": "TicTacToe.CLI_Program.html", "methodName": "DisplayBoard(TicTacToe.Core.Models.Board)", "methodShortName": "DisplayBoard(...)", "fileIndex": 0, "line": 117,
     "metrics": [
       { "value": 110, "exceeded": true },
       { "value": 10, "exceeded": false },
@@ -263,25 +267,25 @@ var riskHotspots = [
       { "value": 6, "exceeded": false },
     ]},
   {
-    "assembly": "TicTacToe.CLI", "class": "TicTacToe.CLI.AI.MediumComputerPlayer", "reportPath": "TicTacToe.CLI_MediumComputerPlayer.html", "methodName": "CheckWinner(TicTacToe.CLI.Models.Board)", "methodShortName": "CheckWinner(...)", "fileIndex": 0, "line": 65,
+    "assembly": "TicTacToe.Core", "class": "TicTacToe.Core.AI.MediumComputerPlayer", "reportPath": "TicTacToe.Core_MediumComputerPlayer.html", "methodName": "CheckWinner(TicTacToe.Core.Models.Board)", "methodShortName": "CheckWinner(...)", "fileIndex": 0, "line": 65,
     "metrics": [
       { "value": 35, "exceeded": true },
       { "value": 28, "exceeded": true },
     ]},
   {
-    "assembly": "TicTacToe.CLI", "class": "TicTacToe.CLI.AI.HardComputerPlayer", "reportPath": "TicTacToe.CLI_HardComputerPlayer.html", "methodName": "CheckWinner(TicTacToe.CLI.Models.Board)", "methodShortName": "CheckWinner(...)", "fileIndex": 0, "line": 91,
+    "assembly": "TicTacToe.Core", "class": "TicTacToe.Core.AI.HardComputerPlayer", "reportPath": "TicTacToe.Core_HardComputerPlayer.html", "methodName": "CheckWinner(TicTacToe.Core.Models.Board)", "methodShortName": "CheckWinner(...)", "fileIndex": 0, "line": 91,
     "metrics": [
       { "value": 28, "exceeded": false },
       { "value": 28, "exceeded": true },
     ]},
   {
-    "assembly": "TicTacToe.CLI", "class": "TicTacToe.CLI.Game.GameEngine", "reportPath": "TicTacToe.CLI_GameEngine.html", "methodName": "CheckWinner()", "methodShortName": "CheckWinner()", "fileIndex": 0, "line": 49,
+    "assembly": "TicTacToe.Core", "class": "TicTacToe.Core.Game.GameEngine", "reportPath": "TicTacToe.Core_GameEngine.html", "methodName": "CheckWinner()", "methodShortName": "CheckWinner()", "fileIndex": 0, "line": 49,
     "metrics": [
       { "value": 28, "exceeded": false },
       { "value": 28, "exceeded": true },
     ]},
   {
-    "assembly": "TicTacToe.CLI", "class": "TicTacToe.CLI.AI.HardComputerPlayer", "reportPath": "TicTacToe.CLI_HardComputerPlayer.html", "methodName": "Minimax(TicTacToe.CLI.Models.Board,TicTacToe.CLI.Models.PlayerSymbol,TicTacToe.CLI.Models.PlayerSymbol,System.Boolean)", "methodShortName": "Minimax(...)", "fileIndex": 0, "line": 36,
+    "assembly": "TicTacToe.Core", "class": "TicTacToe.Core.AI.HardComputerPlayer", "reportPath": "TicTacToe.Core_HardComputerPlayer.html", "methodName": "Minimax(TicTacToe.Core.Models.Board,TicTacToe.Core.Models.PlayerSymbol,TicTacToe.Core.Models.PlayerSymbol,System.Boolean)", "methodShortName": "Minimax(...)", "fileIndex": 0, "line": 36,
     "metrics": [
       { "value": 16, "exceeded": false },
       { "value": 16, "exceeded": true },
