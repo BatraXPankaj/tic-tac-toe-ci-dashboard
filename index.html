@@ -100,19 +100,19 @@
           <div class="metric-target">Target: 25%+ ratio (1:4 spec:code)</div>
           <div class="metric-status" id="spec-coverage-status">Loading...</div>
         </div>
-        <div class="metric">
+        <div class="metric" id="mutation-card">
           <div class="metric-label">🧬 Mutation Score</div>
           <div class="metric-value">60%+</div>
           <div class="metric-target">Run: <code>dotnet stryker</code></div>
           <div class="metric-status">Quality gate: 60%</div>
         </div>
-        <div class="metric">
+        <div class="metric" id="regen-safety-card">
           <div class="metric-label">♻️ Regeneration Safety</div>
           <div class="metric-value">80%+</div>
           <div class="metric-target">Code regenerable from specs</div>
           <div class="metric-status">See workflow results</div>
         </div>
-        <div class="metric">
+        <div class="metric" id="performance-card">
           <div class="metric-label">⚡ Performance</div>
           <div class="metric-value" id="perf-value">~26μs</div>
           <div class="metric-target">AI move calculation</div>
@@ -250,41 +250,20 @@
       const detail = metricDetails[metricKey];
       if (!detail) return;
       
-      const html = \`
-        <h2 class="modal-title">\${detail.title}</h2>
-        
-        <div class="modal-section">
-          <h4>What it measures:</h4>
-          <p>\${detail.description}</p>
-        </div>
-        
-        <div class="modal-section">
-          <h4>Why it matters:</h4>
-          <p>\${detail.why}</p>
-        </div>
-        
-        <div class="modal-section">
-          <h4>🎯 Target:</h4>
-          <p><strong>\${detail.target}</strong></p>
-        </div>
-        
-        <div class="modal-section">
-          <h4>📈 How to improve:</h4>
-          <ul>
-            \${detail.howToImprove.map(item => \`<li>\${item}</li>\`).join('')}
-          </ul>
-        </div>
-        
-        <div class="modal-section">
-          <h4>🛠️ Tools:</h4>
-          <p>\${detail.tools.map(t => \`<code>\${t}</code>\`).join(', ')}</p>
-        </div>
-        
-        <div class="modal-section">
-          <h4>💡 Example:</h4>
-          <p>\${detail.example}</p>
-        </div>
-      \`;
+      let html = '<h2 class="modal-title">' + detail.title + '</h2>';
+      html += '<div class="modal-section"><h4>What it measures:</h4><p>' + detail.description + '</p></div>';
+      html += '<div class="modal-section"><h4>Why it matters:</h4><p>' + detail.why + '</p></div>';
+      html += '<div class="modal-section"><h4>🎯 Target:</h4><p><strong>' + detail.target + '</strong></p></div>';
+      html += '<div class="modal-section"><h4>📈 How to improve:</h4><ul>';
+      detail.howToImprove.forEach(item => { html += '<li>' + item + '</li>'; });
+      html += '</ul></div>';
+      html += '<div class="modal-section"><h4>🛠️ Tools:</h4><p>';
+      detail.tools.forEach((t, i) => { 
+        if (i > 0) html += ', ';
+        html += '<code>' + t + '</code>'; 
+      });
+      html += '</p></div>';
+      html += '<div class="modal-section"><h4>💡 Example:</h4><p>' + detail.example + '</p></div>';
       
       document.getElementById('modalBody').innerHTML = html;
       document.getElementById('metricModal').classList.add('active');
@@ -293,9 +272,9 @@
     // Add click handlers to metrics
     document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('spec-coverage-card')?.addEventListener('click', () => showMetricDetail('spec-coverage'));
-      document.querySelectorAll('.metric')[1]?.addEventListener('click', () => showMetricDetail('mutation'));
-      document.querySelectorAll('.metric')[2]?.addEventListener('click', () => showMetricDetail('regen-safety'));
-      document.querySelectorAll('.metric')[3]?.addEventListener('click', () => showMetricDetail('performance'));
+      document.getElementById('mutation-card')?.addEventListener('click', () => showMetricDetail('mutation'));
+      document.getElementById('regen-safety-card')?.addEventListener('click', () => showMetricDetail('regen-safety'));
+      document.getElementById('performance-card')?.addEventListener('click', () => showMetricDetail('performance'));
     });
 
     // Load coverage summary
