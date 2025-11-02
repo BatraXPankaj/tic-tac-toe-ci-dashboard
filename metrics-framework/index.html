@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Agentic Metrics Framework</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            backdrop-filter: blur(10px);
+            transition: background 0.3s;
+        }
+        
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .philosophy {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 2rem;
+            margin: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .philosophy h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .philosophy ol {
+            margin-left: 1.5rem;
+        }
+        
+        .philosophy li {
+            margin: 0.5rem 0;
+        }
+        
+        .content {
+            padding: 2rem;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .metric-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            background: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .metric-card.primary {
+            border-left: 4px solid #667eea;
+        }
+        
+        .metric-card.secondary {
+            border-left: 4px solid #48bb78;
+        }
+        
+        .metric-card.deprecated {
+            border-left: 4px solid #f56565;
+            opacity: 0.7;
+        }
+        
+        .metric-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+        
+        .metric-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .metric-target {
+            background: #667eea;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .metric-target.secondary {
+            background: #48bb78;
+        }
+        
+        .metric-target.deprecated {
+            background: #f56565;
+        }
+        
+        .metric-description {
+            color: #4a5568;
+            margin-bottom: 1rem;
+        }
+        
+        .metric-details {
+            display: grid;
+            gap: 0.5rem;
+        }
+        
+        .metric-detail {
+            display: flex;
+            align-items: start;
+            font-size: 0.9rem;
+        }
+        
+        .metric-detail-label {
+            font-weight: 600;
+            color: #667eea;
+            min-width: 100px;
+        }
+        
+        .metric-detail-value {
+            color: #4a5568;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: 0.5rem;
+        }
+        
+        .badge.critical {
+            background: #fed7d7;
+            color: #c53030;
+        }
+        
+        .badge.lower-better {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .quality-gates {
+            background: #f7fafc;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+        
+        .quality-gates h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .gate-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .gate-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+        
+        .gate-requirements {
+            display: grid;
+            gap: 0.5rem;
+            margin-left: 1rem;
+        }
+        
+        .gate-requirement {
+            display: flex;
+            align-items: center;
+            font-size: 0.95rem;
+        }
+        
+        .gate-requirement.required {
+            color: #c53030;
+        }
+        
+        .gate-requirement.recommended {
+            color: #d69e2e;
+        }
+        
+        .gate-requirement::before {
+            content: "●";
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:hover {
+            background: #f7fafc;
+        }
+        
+        .traditional {
+            color: #f56565;
+            text-decoration: line-through;
+        }
+        
+        .agentic {
+            color: #48bb78;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-link">← Back to Dashboard</a>
+            <h1>🎯 AI-Agentic Metrics Framework</h1>
+            <p>Modern metrics for code developed with/by AI agents</p>
+        </div>
+        
+        <div class="philosophy">
+            <h2>🤖 Philosophy</h2>
+            <p><strong>In AI-agentic development, code is a specification artifact, not a crafted asset.</strong></p>
+            <p>Metrics should measure:</p>
+            <ol>
+                <li>How well code communicates intent (to humans AND AI)</li>
+                <li>How safely code can be regenerated from specifications</li>
+                <li>How completely behavior is verified</li>
+                <li>How efficiently AI can understand and modify code</li>
+            </ol>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">🌟 Primary Metrics (Critical)</h2>
+                <p>These metrics directly measure AI-agentic development success and are required for production releases.</p>
+                <div class="metrics-grid">
+
+                    <div class="metric-card primary">
+                        <div class="metric-header">
+                            <div class="metric-name">Specification Coverage<span class="badge critical">CRITICAL</span></div>
+                            <div class="metric-target primary">Target: 85%</div>
+                        </div>
+                        <div class="metric-description">% of production code with corresponding BDD scenarios or property tests</div>
+                        <div class="metric-details">
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Why:</span>
+                                <span class="metric-detail-value">AI needs specs to regenerate correctly</span>
+                            </div>
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Measure:</span>
+                                <span class="metric-detail-value">Lines in feature files / Lines in src (excluding Program.cs)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card primary">
+                        <div class="metric-header">
+                            <div class="metric-name">Behavioral Test Completeness<span class="badge critical">CRITICAL</span></div>
+                            <div class="metric-target primary">Target: 100%</div>
+                        </div>
+                        <div class="metric-description">All user-facing scenarios have Given/When/Then coverage</div>
+                        <div class="metric-details">
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Why:</span>
+                                <span class="metric-detail-value">Tests are the source of truth for regeneration</span>
+                            </div>
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Measure:</span>
+                                <span class="metric-detail-value">Feature scenarios / User stories</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card primary">
+                        <div class="metric-header">
+                            <div class="metric-name">Regeneration Safety<span class="badge critical">CRITICAL</span></div>
+                            <div class="metric-target primary">Target: 90%</div>
+                        </div>
+                        <div class="metric-description">Can code be deleted and regenerated from tests without breaking?</div>
+                        <div class="metric-details">
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Why:</span>
+                                <span class="metric-detail-value">Measures true test quality, not just coverage %</span>
+                            </div>
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Measure:</span>
+                                <span class="metric-detail-value">% of modules passing regeneration test</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card primary">
+                        <div class="metric-header">
+                            <div class="metric-name">Mutation Test Effectiveness<span class="badge critical">CRITICAL</span></div>
+                            <div class="metric-target primary">Target: 75%</div>
+                        </div>
+                        <div class="metric-description">Quality of test assertions (via Stryker.NET)</div>
+                        <div class="metric-details">
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Why:</span>
+                                <span class="metric-detail-value">Detects weak tests that won't catch AI mistakes</span>
+                            </div>
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Measure:</span>
+                                <span class="metric-detail-value">% mutants killed</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card primary">
+                        <div class="metric-header">
+                            <div class="metric-name">Context Efficiency<span class="badge lower-better">LOWER IS BETTER</span></div>
+                            <div class="metric-target primary">Target: 3%</div>
+                        </div>
+                        <div class="metric-description">Average files needed for AI to understand a change</div>
+                        <div class="metric-details">
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Why:</span>
+                                <span class="metric-detail-value">Simpler context = faster AI development</span>
+                            </div>
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Measure:</span>
+                                <span class="metric-detail-value">Avg dependencies per module</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card primary">
+                        <div class="metric-header">
+                            <div class="metric-name">Performance Stability</div>
+                            <div class="metric-target primary">Target: 10percent</div>
+                        </div>
+                        <div class="metric-description">Benchmark variance over time (no regressions)</div>
+                        <div class="metric-details">
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Why:</span>
+                                <span class="metric-detail-value">AI changes shouldn't degrade performance unknowingly</span>
+                            </div>
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Measure:</span>
+                                <span class="metric-detail-value">Benchmark drift from baseline</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card primary">
+                        <div class="metric-header">
+                            <div class="metric-name">Prompt Consistency<span class="badge critical">CRITICAL</span></div>
+                            <div class="metric-target primary">Target: 95percent</div>
+                        </div>
+                        <div class="metric-description">Same specification → same code across regenerations</div>
+                        <div class="metric-details">
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Why:</span>
+                                <span class="metric-detail-value">Deterministic AI behavior ensures predictable outcomes</span>
+                            </div>
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Measure:</span>
+                                <span class="metric-detail-value">Hash similarity of code from identical prompts</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card primary">
+                        <div class="metric-header">
+                            <div class="metric-name">API Contract Stability<span class="badge critical">CRITICAL</span></div>
+                            <div class="metric-target primary">Target: 100%</div>
+                        </div>
+                        <div class="metric-description">Public interfaces remain stable across regenerations</div>
+                        <div class="metric-details">
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Why:</span>
+                                <span class="metric-detail-value">Breaking changes must be intentional, not accidental</span>
+                            </div>
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Measure:</span>
+                                <span class="metric-detail-value">% of public APIs unchanged after regeneration</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card primary">
+                        <div class="metric-header">
+                            <div class="metric-name">Error Recovery Rate</div>
+                            <div class="metric-target primary">Target: 80percent</div>
+                        </div>
+                        <div class="metric-description">AI can fix failing tests from error messages alone</div>
+                        <div class="metric-details">
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Why:</span>
+                                <span class="metric-detail-value">Self-healing code reduces manual intervention</span>
+                            </div>
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Measure:</span>
+                                <span class="metric-detail-value">Test failures fixed by AI without human help</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">📊 Secondary Metrics (Track & Optimize)</h2>
+                <p>These metrics provide additional insights but don't block releases. Optimize over time.</p>
+                <div class="metrics-grid">
+
+                    <div class="metric-card secondary">
+                        <div class="metric-header">
+                            <div class="metric-name">Token Efficiency<span class="badge lower-better">LOWER IS BETTER</span></div>
+                            <div class="metric-target secondary">Target: 2000tokens per module</div>
+                        </div>
+                        <div class="metric-description">How much context AI needs to understand code</div>
+                        <div class="metric-details">
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Why:</span>
+                                <span class="metric-detail-value">Less context = cheaper AI operations, faster generation</span>
+                            </div>
+
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Measure:</span>
+                                <span class="metric-detail-value">Avg tokens needed for AI to modify a module</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="metric-card secondary">
+                        <div class="metric-header">
+                            <div class="metric-name">Semantic Versioning Compliance</div>
+                            <div class="metric-target secondary">Target: 100percent</div>
+                        </div>
+                        <div class="metric-description">Breaking changes properly versioned</div>
+                        <div class="metric-details">
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Why:</span>
+                                <span class="metric-detail-value">AI must understand and respect version semantics</span>
+                            </div>
+
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Measure:</span>
+                                <span class="metric-detail-value">% of releases with correct semver bumps</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="metric-card secondary">
+                        <div class="metric-header">
+                            <div class="metric-name">Test-to-Production Ratio</div>
+                            <div class="metric-target secondary">Target: 1.2</div>
+                        </div>
+                        <div class="metric-description">Ratio of test scenarios to production code paths</div>
+                        <div class="metric-details">
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Why:</span>
+                                <span class="metric-detail-value">More scenarios than code paths = comprehensive coverage</span>
+                            </div>
+
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Measure:</span>
+                                <span class="metric-detail-value">BDD scenarios / distinct code paths</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="metric-card secondary">
+                        <div class="metric-header">
+                            <div class="metric-name">NL Clarity Score</div>
+                            <div class="metric-target secondary">Target: 80</div>
+                        </div>
+                        <div class="metric-description">Readability of comments, names, scenarios</div>
+                        <div class="metric-details">
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Why:</span>
+                                <span class="metric-detail-value">AI learns from clear language</span>
+                            </div>
+
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Measure:</span>
+                                <span class="metric-detail-value">Comment quality + naming conventions</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="metric-card secondary">
+                        <div class="metric-header">
+                            <div class="metric-name">Test Suite Speed</div>
+                            <div class="metric-target secondary">Target: 10seconds</div>
+                        </div>
+                        <div class="metric-description">Time to run all tests</div>
+                        <div class="metric-details">
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Why:</span>
+                                <span class="metric-detail-value">Fast feedback loop for AI iteration</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="metric-card secondary">
+                        <div class="metric-header">
+                            <div class="metric-name">Build Reliability</div>
+                            <div class="metric-target secondary">Target: 95</div>
+                        </div>
+                        <div class="metric-description">% of builds passing first time</div>
+                        <div class="metric-details">
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Why:</span>
+                                <span class="metric-detail-value">AI-generated code should compile reliably</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2 class="section-title">⚠️ Deprecated Metrics (Legacy)</h2>
+                <p>These traditional metrics optimize for the wrong outcomes in AI-agentic development. Track for reference only.</p>
+                <div class="metrics-grid">
+
+                    <div class="metric-card deprecated">
+                        <div class="metric-header">
+                            <div class="metric-name">Cyclomatic Complexity</div>
+                            <div class="metric-target deprecated">DEPRECATED</div>
+                        </div>
+                        <div class="metric-details">
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Why Deprecated:</span>
+                                <span class="metric-detail-value">Optimizes for human cleverness, not AI clarity</span>
+                            </div>
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Use Instead:</span>
+                                <span class="metric-detail-value">context_window_efficiency + specification_coverage</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card deprecated">
+                        <div class="metric-header">
+                            <div class="metric-name">CRAP Score</div>
+                            <div class="metric-target deprecated">DEPRECATED</div>
+                        </div>
+                        <div class="metric-details">
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Why Deprecated:</span>
+                                <span class="metric-detail-value">Penalizes verbose-but-clear code that AI prefers</span>
+                            </div>
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Use Instead:</span>
+                                <span class="metric-detail-value">regeneration_safety_score</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card deprecated">
+                        <div class="metric-header">
+                            <div class="metric-name">DRY Violations</div>
+                            <div class="metric-target deprecated">DEPRECATED</div>
+                        </div>
+                        <div class="metric-details">
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Why Deprecated:</span>
+                                <span class="metric-detail-value">Strategic duplication aids AI comprehension</span>
+                            </div>
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Use Instead:</span>
+                                <span class="metric-detail-value">specification_coverage (DRY the specs, not the code)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="metric-card deprecated">
+                        <div class="metric-header">
+                            <div class="metric-name">Line Coverage %</div>
+                            <div class="metric-target deprecated">DEPRECATED</div>
+                        </div>
+                        <div class="metric-details">
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Why Deprecated:</span>
+                                <span class="metric-detail-value">Structural metric; behavioral coverage matters more</span>
+                            </div>
+                            <div class="metric-detail">
+                                <span class="metric-detail-label">Use Instead:</span>
+                                <span class="metric-detail-value">behavioral_test_completeness + mutation_test_score</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+            <div class="quality-gates">
+                <h3>🚪 Quality Gates</h3>
+
+                <div class="gate-section">
+                    <div class="gate-title">Merge To Main</div>
+                    <div class="gate-requirements">
+<div style="margin-bottom: 0.5rem;"><strong>Required:</strong></div>
+                        <div class="gate-requirement required">behavioral_test_completeness: 100%</div>
+                        <div class="gate-requirement required">mutation_test_score: 60%</div>
+                        <div class="gate-requirement required">build_success_rate: 100%</div>
+<div style="margin-top: 1rem; margin-bottom: 0.5rem;"><strong>Recommended:</strong></div>
+                        <div class="gate-requirement recommended">specification_coverage: 75%</div>
+                        <div class="gate-requirement recommended">performance_stability: 15%</div>
+
+                    </div>
+                </div>
+
+                <div class="gate-section">
+                    <div class="gate-title">Production Release</div>
+                    <div class="gate-requirements">
+<div style="margin-bottom: 0.5rem;"><strong>Required:</strong></div>
+                        <div class="gate-requirement required">behavioral_test_completeness: 100%</div>
+                        <div class="gate-requirement required">mutation_test_score: 75%</div>
+                        <div class="gate-requirement required">regeneration_safety_score: 80%</div>
+                        <div class="gate-requirement required">specification_coverage: 85%</div>
+                        <div class="gate-requirement required">performance_stability: 10%</div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Generated:</strong> 2025-11-02 11:28:43 UTC</p>
+            <p>AI-Agentic Metrics Framework v1.0</p>
+        </div>
+    </div>
+</body>
+</html>

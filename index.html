@@ -14,7 +14,8 @@
     .card{background:white;border-radius:8px;padding:1.5rem;margin-bottom:1.5rem;box-shadow:0 1px 3px rgba(0,0,0,0.1);}
     .card h2{margin:0 0 1rem 0;font-size:1.25rem;color:#2d3748;border-bottom:2px solid #e2e8f0;padding-bottom:0.5rem;}
     .metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-bottom:1.5rem;}
-    .metric{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:1.25rem;border-radius:8px;box-shadow:0 4px 6px rgba(0,0,0,0.1);}
+    .metric{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:1.25rem;border-radius:8px;box-shadow:0 4px 6px rgba(0,0,0,0.1);cursor:pointer;transition:transform 0.2s;}
+    .metric:hover{transform:translateY(-4px);box-shadow:0 6px 12px rgba(0,0,0,0.15);}
     .metric.secondary{background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%);}
     .metric.deprecated{background:#cbd5e0;color:#4a5568;opacity:0.7;}
     .metric-label{font-size:0.875rem;opacity:0.9;margin-bottom:0.25rem;font-weight:500;}
@@ -30,12 +31,65 @@
     .badge.new{background:#c6f6d5;color:#22543d;}
     .info{background:#ebf8ff;border-left:4px solid#3182ce;padding:1rem;border-radius:4px;font-size:0.875rem;color:#2c5282;}
     .timestamp{color:#a0aec0;font-size:0.875rem;margin-top:1rem;}
+    .philosophy{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;padding:2rem;border-radius:8px;margin-bottom:1.5rem;}
+    .philosophy h2{margin:0 0 1rem 0;font-size:1.5rem;}
+    .philosophy p{margin-bottom:0.75rem;line-height:1.8;}
+    .comparison{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem;}
+    .comparison-col h3{margin:0 0 0.5rem 0;font-size:1.1rem;opacity:0.9;}
+    .comparison-col ul{margin:0;padding-left:1.5rem;}
+    .comparison-col li{margin-bottom:0.5rem;}
+    .learn-more{display:inline-block;margin-top:1rem;padding:0.5rem 1rem;background:rgba(255,255,255,0.2);border-radius:6px;text-decoration:none;color:white;font-weight:500;transition:all 0.2s;}
+    .learn-more:hover{background:rgba(255,255,255,0.3);text-decoration:none;}
+    .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:1000;align-items:center;justify-content:center;padding:2rem;}
+    .modal.active{display:flex;}
+    .modal-content{background:white;border-radius:12px;max-width:700px;max-height:90vh;overflow-y:auto;padding:2rem;position:relative;}
+    .modal-close{position:absolute;top:1rem;right:1rem;font-size:1.5rem;cursor:pointer;background:none;border:none;color:#718096;}
+    .modal-close:hover{color:#2d3748;}
+    .modal-title{color:#667eea;font-size:1.8rem;margin-bottom:1rem;}
+    .modal-section{margin-bottom:1.5rem;}
+    .modal-section h4{color:#2d3748;margin-bottom:0.5rem;}
+    .modal-section code{background:#f7fafc;padding:0.25rem 0.5rem;border-radius:4px;font-size:0.9rem;}
+    .modal-section pre{background:#f7fafc;padding:1rem;border-radius:6px;overflow-x:auto;}
   </style>
 </head>
 <body>
   <div class="container">
     <h1>🎯 TicTacToe AI-Agentic Dashboard</h1>
     <div class="subtitle">Metrics reimagined for AI-driven development</div>
+    
+    <details class="philosophy" style="cursor:pointer;" open>
+      <summary style="font-size:1.5rem;font-weight:600;list-style:none;cursor:pointer;">
+        🤖 What is AI-Agentic Development? (Click to collapse)
+      </summary>
+      <div style="margin-top:1rem;">
+        <p><strong>Core Principle:</strong> In AI-agentic development, <em>code is a specification artifact, not a hand-crafted asset</em>. AI agents generate and regenerate code from behavioral specifications.</p>
+        
+        <div class="comparison">
+          <div class="comparison-col">
+            <h3>❌ Traditional Metrics</h3>
+            <ul>
+              <li><strong>Line Coverage %</strong> - Measures test execution</li>
+              <li><strong>Cyclomatic Complexity</strong> - Penalizes clarity</li>
+              <li><strong>CRAP Score</strong> - Optimizes for brevity</li>
+              <li><strong>DRY Enforcement</strong> - Forces abstraction</li>
+            </ul>
+          </div>
+          <div class="comparison-col">
+            <h3>✅ AI-Agentic Metrics</h3>
+            <ul>
+              <li><strong>Specification Coverage</strong> - Can AI rebuild from specs?</li>
+              <li><strong>Mutation Score</strong> - Quality of assertions</li>
+              <li><strong>Regeneration Safety</strong> - Spec completeness</li>
+              <li><strong>Context Efficiency</strong> - AI comprehension cost</li>
+            </ul>
+          </div>
+        </div>
+        
+        <p style="margin-top:1rem;"><strong>Why this matters:</strong> Traditional metrics optimize for human-crafted code. They create false positives (100% coverage with weak tests) and false negatives (clear code flagged as "complex"). AI-agentic metrics measure what actually matters: Can the code be reliably regenerated from specifications?</p>
+        
+        <a href="metrics-framework/index.html" class="learn-more">📖 Read Full Metrics Framework →</a>
+      </div>
+    </details>
     
     <div class="card">
       <h2>🌟 Primary AI-Agentic Metrics <span class="badge new">NEW</span></h2>
@@ -107,7 +161,7 @@
           <small style="color:#718096;">Historical performance tracking</small>
         </div>
         <div class="link-card">
-          <a href="https://github.com/CoforgeInsurance/cid-ai-guide/blob/main/agentic-metrics.yml">🎯 Metrics Framework</a>
+          <a href="metrics-framework/index.html">🎯 Metrics Framework</a>
           <small style="color:#718096;">Complete metrics definition</small>
         </div>
       </div>
@@ -144,7 +198,106 @@
     <div class="timestamp" id="timestamp">Loading...</div>
   </div>
 
+  <!-- Modal for metric details -->
+  <div id="metricModal" class="modal" onclick="if(event.target===this) this.classList.remove('active')">
+    <div class="modal-content">
+      <button class="modal-close" onclick="document.getElementById('metricModal').classList.remove('active')">✕</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
   <script>
+    const metricDetails = {
+      'spec-coverage': {
+        title: '📋 Specification Coverage',
+        description: 'Measures the ratio of specification lines (BDD scenarios) to production code lines.',
+        why: 'In AI-agentic development, specifications are the source of truth. High specification coverage means AI can regenerate code reliably from behavioral definitions.',
+        target: '25%+ ratio (1 line of spec for every 4 lines of code)',
+        howToImprove: ['Write Given/When/Then scenarios for all user stories', 'Cover edge cases in feature files', 'Use Scenario Outlines for data variations', 'Document business rules as BDD scenarios'],
+        tools: ['SpecFlow', 'Gherkin', 'Living Documentation generator'],
+        example: 'If you have 100 lines of code, aim for 25+ lines of feature specifications.'
+      },
+      'mutation': {
+        title: '🧬 Mutation Score',
+        description: 'Measures test quality by introducing bugs and checking if tests catch them.',
+        why: 'Traditional coverage can hit 100% but still have weak assertions. Mutation testing reveals if your tests actually verify behavior or just execute code.',
+        target: '60%+ mutants killed',
+        howToImprove: ['Write specific assertions (not just Assert.NotNull)', 'Test boundary conditions', 'Verify exact expected values', 'Check all return paths'],
+        tools: ['Stryker.NET', 'dotnet-stryker'],
+        example: 'Run: dotnet tool install -g dotnet-stryker && dotnet stryker'
+      },
+      'regen-safety': {
+        title: '♻️ Regeneration Safety',
+        description: 'Tests if code can be deleted and regenerated from specifications without breaking tests.',
+        why: 'The ultimate test of specification completeness. If AI can rebuild your code from specs and all tests pass, your specs are truly the source of truth.',
+        target: '80%+ of modules regenerable',
+        howToImprove: ['Write comprehensive BDD scenarios', 'Document interfaces and contracts', 'Include property-based tests for invariants', 'Keep modules focused (single responsibility)'],
+        tools: ['GitHub Copilot', 'AI code generation', 'Automated regeneration tests'],
+        example: 'Delete Board.cs → AI reads GameBoard.feature → Regenerates code → Tests pass!'
+      },
+      'performance': {
+        title: '⚡ Performance Benchmarks',
+        description: 'Tracks performance of critical code paths over time.',
+        why: 'AI-generated code can inadvertently introduce performance regressions. Continuous benchmarking ensures performance stays stable.',
+        target: '<10% variance from baseline',
+        howToImprove: ['Benchmark critical paths', 'Set performance budgets', 'Use BenchmarkDotNet', 'Track allocations'],
+        tools: ['BenchmarkDotNet', 'Performance testing'],
+        example: 'AI move calculation: ~26μs (tracked over time)'
+      }
+    };
+
+    function showMetricDetail(metricKey) {
+      const detail = metricDetails[metricKey];
+      if (!detail) return;
+      
+      const html = \`
+        <h2 class="modal-title">\${detail.title}</h2>
+        
+        <div class="modal-section">
+          <h4>What it measures:</h4>
+          <p>\${detail.description}</p>
+        </div>
+        
+        <div class="modal-section">
+          <h4>Why it matters:</h4>
+          <p>\${detail.why}</p>
+        </div>
+        
+        <div class="modal-section">
+          <h4>🎯 Target:</h4>
+          <p><strong>\${detail.target}</strong></p>
+        </div>
+        
+        <div class="modal-section">
+          <h4>📈 How to improve:</h4>
+          <ul>
+            \${detail.howToImprove.map(item => \`<li>\${item}</li>\`).join('')}
+          </ul>
+        </div>
+        
+        <div class="modal-section">
+          <h4>🛠️ Tools:</h4>
+          <p>\${detail.tools.map(t => \`<code>\${t}</code>\`).join(', ')}</p>
+        </div>
+        
+        <div class="modal-section">
+          <h4>💡 Example:</h4>
+          <p>\${detail.example}</p>
+        </div>
+      \`;
+      
+      document.getElementById('modalBody').innerHTML = html;
+      document.getElementById('metricModal').classList.add('active');
+    }
+
+    // Add click handlers to metrics
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('spec-coverage-card')?.addEventListener('click', () => showMetricDetail('spec-coverage'));
+      document.querySelectorAll('.metric')[1]?.addEventListener('click', () => showMetricDetail('mutation'));
+      document.querySelectorAll('.metric')[2]?.addEventListener('click', () => showMetricDetail('regen-safety'));
+      document.querySelectorAll('.metric')[3]?.addEventListener('click', () => showMetricDetail('performance'));
+    });
+
     // Load coverage summary
     fetch('coverage-summary.json')
       .then(r => r.json())
