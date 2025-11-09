@@ -10,5 +10,5 @@ AMD EPYC 7763, 1 CPU, 2 logical cores and 1 physical core
 ```
 | Method            | Mean     | Error    | StdDev   | Gen0   | Allocated |
 |------------------ |---------:|---------:|---------:|-------:|----------:|
-| ComputeBestMove_X | 24.97 μs | 0.273 μs | 0.228 μs | 1.4343 |  23.57 KB |
-| ComputeBestMove_O | 25.47 μs | 0.190 μs | 0.158 μs | 1.4343 |  23.48 KB |
+| ComputeBestMove_X | 25.68 μs | 0.120 μs | 0.100 μs | 1.4343 |  23.57 KB |
+| ComputeBestMove_O | 25.43 μs | 0.196 μs | 0.174 μs | 1.4343 |  23.48 KB |
